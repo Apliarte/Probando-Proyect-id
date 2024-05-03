@@ -9,11 +9,14 @@ class ListadeEjemplo extends StatelessWidget {
     'GitHub --> ApliArte'
   ];
 
-  const ListadeEjemplo({Key? key}) : super(key: key);
+  const ListadeEjemplo({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Listas'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: ListView.separated(

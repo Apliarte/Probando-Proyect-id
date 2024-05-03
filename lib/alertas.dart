@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -7,7 +5,8 @@ import 'package:flutter/material.dart';
 
 // aquí iría la clase hasta el key
 class AlertaIosAndro extends StatelessWidget {
-  const AlertaIosAndro({super.key});  @override
+  const AlertaIosAndro({super.key});
+  @override
   Widget build(BuildContext context) {
     void displayDialogIOS(BuildContext context) {
       showCupertinoDialog(
@@ -71,6 +70,16 @@ class AlertaIosAndro extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+                onPressed: () => showAboutDialog(context: context, children: [
+                      const Text(
+                          'loremp ipsum dolor sit amet, consectetur adipiscing elit.'),
+                    ]),
+                icon: const Icon(Icons.info_outline))
+          ],
+        ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -107,5 +116,3 @@ class AlertaIosAndro extends StatelessWidget {
     );
   }
 }
-
-
