@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 
 // aquí iría la clase hasta el key
 class AlertaIosAndro extends StatelessWidget {
-  const AlertaIosAndro({super.key});
-  @override
+  const AlertaIosAndro({super.key});  @override
   Widget build(BuildContext context) {
     void displayDialogIOS(BuildContext context) {
       showCupertinoDialog(

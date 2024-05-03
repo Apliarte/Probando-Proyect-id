@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:myapp/ahorcado.dart';
 import 'package:myapp/alertas.dart';
+import 'package:myapp/listadewidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const Color _customColor = Color(0xFFb37bbb);
@@ -65,7 +65,7 @@ class _CambioDeColorState extends State<CambioDeColor> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-               Text(
+              const Text(
                 'Deja pulsado el icono para que desvele la información',
                 textAlign: TextAlign.center,
               ),
@@ -84,36 +84,45 @@ class _CambioDeColorState extends State<CambioDeColor> {
                 child: IconButton(
                   color: Theme.of(context).colorScheme.primary,
                   onPressed: () {
-// navegar a alertas.dart
+                    // navegar a alertas.dart
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const AlertaIosAndro()),
+                      MaterialPageRoute(
+                          builder: (context) => const AlertaIosAndro()),
                     );
-
-                    
                   },
                   icon: const Icon(Icons.search),
                 ),
               ),
-              ElevatedButton(onPressed: () {
-                  Navigator.push(
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>  Ahorcado()),
+                      MaterialPageRoute(
+                          builder: (context) => const ListadeEjemplo()),
                     );
-              }, child: Icon(Icons.gamepad)),
-             
+                  },
+                  child: const Icon(Icons.list)),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Ahorcado()),
+                    );
+                  },
+                  child: const Icon(Icons.gamepad)),
               const SizedBox(
                 height: 30,
               ),
               ElevatedButton(
-                  child: Text('S.of(context).cambiaElColor'),
+                  child: const Text('S.of(context).cambiaElColor'),
                   onPressed: () {
                     setState(() {
                       selection = (selection + 1) % 16;
                     });
                   }),
               FilledButton.icon(
-                label: Text('S.of(context).cambiaElColor'),
+                label: const Text('S.of(context).cambiaElColor'),
                 onPressed: () {
                   setState(() {
                     selection = (selection + 1) % 16;
@@ -127,57 +136,50 @@ class _CambioDeColorState extends State<CambioDeColor> {
               const SizedBox(
                 height: 30,
               ),
-           Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Card(
-            
-              
-              elevation: 5,
-              child: Column(
-                children: [
-                  const ListTile(
-                    leading: Icon(Icons.accessibility_new_rounded,
-                        ),
-                    title: Text('Contacte conmigo en Directo'),
-                    subtitle: Text(
-                        '''Me llamo Javier, en las redes erbolamm y en twtich soy ApliArte''',),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Card(
+                    elevation: 5,
+                    child: Column(
                       children: [
-                        TextButton(
-                            onPressed: () {
-                              const url =
-                                  'https://www.apliarte.com/p/redes.html';
-                              launch(url);
-                            },
-                            
-                            child: const Text(
-                                
-                                'Ver Las Redes')),
-                        const Icon(Icons.compare_arrows_sharp),
-                        // ignore: prefer_const_constructors
-                        TextButton(
-                            onPressed: () {
-                              const url = 'https://www.twitch.tv/apliarte';
+                        const ListTile(
+                          leading: Icon(
+                            Icons.accessibility_new_rounded,
+                          ),
+                          title: Text('Contacte conmigo en Directo'),
+                          subtitle: Text(
+                            '''Me llamo Javier, en las redes erbolamm y en twtich soy ApliArte''',
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                  onPressed: () {
+                                    const urls = 'https://www.google.com';
 
-                              launch(url);
-                            },
-                            style: ButtonStyle(
-                              
-                                  
-                            ),
-                            child: const Text(
-                              
-                                'Ver En Directo')),
+                                    launchUrl(urls as Uri);
+                                  },
+                                  child: const Text('Ver Las Redes')),
+                              const Icon(Icons.compare_arrows_sharp),
+                              // ignore: prefer_const_constructors
+                              TextButton(
+                                  onPressed: () {
+                                    const url =
+                                        'https://www.twitch.tv/apliarte';
+
+                                    launch(url);
+                                  },
+                                  style: const ButtonStyle(),
+                                  child: const Text('Ver En Directo')),
+                            ],
+                          ),
+                        )
                       ],
-                    ),
-                  )
-                ],
-              )),
-        ),
+                    )),
+              ),
             ],
           ),
         ),

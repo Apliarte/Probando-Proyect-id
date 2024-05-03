@@ -6,7 +6,10 @@ import 'package:myapp/lista_ahorcado.dart';
 // Asume que tu lógica del juego está aquí
 
 class Ahorcado extends StatefulWidget {
+  const Ahorcado({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _AhorcadoState createState() => _AhorcadoState();
 }
 
