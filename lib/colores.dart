@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/ahorcado.dart';
 import 'package:myapp/alertas.dart';
+import 'package:myapp/animacion.dart';
 import 'package:myapp/listadewidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -62,8 +63,7 @@ class _CambioDeColorState extends State<CambioDeColor> {
       theme: AppTheme(selectedColor: selection).theme(),
       home: Scaffold(
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Wrap(
             children: [
               const Text(
                 'Deja pulsado el icono para que desvele la información',
@@ -94,6 +94,15 @@ class _CambioDeColorState extends State<CambioDeColor> {
                   icon: const Icon(Icons.search),
                 ),
               ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Animacion()),
+                    );
+                  },
+                  child: const Icon(Icons.animation)),
               ElevatedButton(
                   onPressed: () {
                     Navigator.push(

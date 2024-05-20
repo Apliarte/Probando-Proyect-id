@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:myapp/lista_ahorcado.dart';
+import 'package:myapp/listado_palabras.dart';
 
 // Asume que tu lógica del juego está aquí
 
@@ -59,66 +60,68 @@ class _AhorcadoState extends State<Ahorcado> {
         title: const Text('Ahorcado'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(80.0),
+        padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 80),
-                Text('Palabra: ${adivinaPalabra.join(' ')}'),
-                TextField(
-                  onChanged: (value) {
-                    if (intentos >= 10) {
-                    } else {
-                      if (value.isNotEmpty) {
-                        intentarLetra(value.trim());
-                        _controller.clear();
-                        FocusScope.of(context).unfocus();
-                      }
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Palabra: ${adivinaPalabra.join(' ')}'),
+              TextField(
+                onChanged: (value) {
+                  if (intentos >= 10) {
+                  } else {
+                    if (value.isNotEmpty) {
+                      intentarLetra(value.trim());
+                      _controller.clear();
+                      FocusScope.of(context).unfocus();
                     }
-                  },
-                  decoration:
-                      const InputDecoration(hintText: 'Escribe una letra'),
-                  onSubmitted: (value) => intentarLetra(value.trim()),
-                  controller: _controller,
+                  }
+                },
+                decoration:
+                    const InputDecoration(hintText: 'Escribe una letra'),
+                onSubmitted: (value) => intentarLetra(value.trim()),
+                controller: _controller,
+              ),
+              Text('Letras usadas: ${letrasElegidas.join(', ')}'),
+              Text('Intentos restantes: ${10 - intentos}'),
+              Visibility(
+                visible: (intentos >= 10),
+                child: Column(
+                  children: [
+                    const Text('S.of(context).hasPerdido,'),
+                    Text(
+                      palabraActual,
+                      style: const TextStyle(fontSize: 60),
+                    ),
+                  ],
                 ),
-                Text('Letras usadas: ${letrasElegidas.join(', ')}'),
-                Text('Intentos restantes: ${10 - intentos}'),
-                Visibility(
-                  visible: (intentos >= 10),
-                  child: Column(
-                    children: [
-                      const Text('S.of(context).hasPerdido,'),
-                      Text(
-                        palabraActual,
-                        style: const TextStyle(fontSize: 60),
-                      ),
-                    ],
-                  ),
+              ),
+              Visibility(
+                visible: (intentos >= 10 || !adivinaPalabra.contains('_')),
+                child: Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () => reiniciarJuego(),
+                      child: const Text('Reiniciar Juego'),
+                    ),
+                    const Text(
+                        'Gracias por jugar al ahorcado con apliarte Games. no olvides visitar apliarte.com para nuevas novedades'),
+                  ],
                 ),
-                Visibility(
-                  visible: (intentos >= 10 || !adivinaPalabra.contains('_')),
-                  child: Column(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () => reiniciarJuego(),
-                        child: const Text('Reiniciar Juego'),
-                      ),
-                      const Text(
-                          'Gracias por jugar al ahorcado con apliarte Games. no olvides visitar apliarte.com para nuevas novedades'),
-                    ],
-                  ),
+              ),
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(ahorcado[intentos],
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      )),
                 ),
-                Text(ahorcado[intentos],
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    )),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
